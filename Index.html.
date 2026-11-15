@@ -1,0 +1,265 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Uma surpresa para Naju ❤️</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    font-family: Georgia, serif;
+    background: linear-gradient(135deg, #fff1f5, #f8dce8);
+    color: #573c49;
+}
+
+.card {
+    width: 100%;
+    max-width: 500px;
+    min-height: 420px;
+    padding: 40px 25px;
+    background: rgba(255,255,255,0.9);
+    border-radius: 25px;
+    box-shadow: 0 15px 45px rgba(150,70,100,0.15);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.heart {
+    font-size: 35px;
+    color: #e75480;
+    animation: pulse 1.5s infinite;
+    margin-bottom: 15px;
+}
+
+h1 {
+    font-size: 32px;
+    font-weight: normal;
+    margin-bottom: 15px;
+}
+
+p {
+    font-size: 18px;
+    line-height: 1.7;
+    color: #856b77;
+}
+
+.stage {
+    width: 100%;
+    min-height: 110px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin-top: 20px;
+}
+
+button {
+    border: none;
+    padding: 15px 28px;
+    border-radius: 30px;
+    background: #e75480;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 7px 18px rgba(200,50,100,0.2);
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background: #c93668;
+}
+
+button.moved {
+    transform: translateX(45px);
+}
+
+.final {
+    text-align: left;
+    color: #573c49;
+    font-size: 17px;
+    line-height: 1.9;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.dots {
+    display: flex;
+    gap: 8px;
+    margin-top: 25px;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #efc6d5;
+}
+
+.dot.active {
+    background: #e75480;
+}
+
+.signature {
+    margin-top: 20px;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: #b18b9a;
+}
+
+@keyframes pulse {
+    50% {
+        transform: scale(1.15);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<div class="heart">♡</div>
+
+<section id="content">
+
+<h1 id="heading">Oi, Naju!</h1>
+
+<p id="message">
+Tudo bem? Tenho uma coisa pra te mostrar.
+</p>
+
+<div class="stage">
+<button id="nextButton">Pode mostrar</button>
+</div>
+
+</section>
+
+<section id="finalMessage" class="hidden">
+
+<div class="heart">♡</div>
+
+<h1>Finalmente! ❤️</h1>
+
+<p class="final">
+Agora falando sério...
+
+<br><br>
+
+Espero que tenha dado tudo certo no ENEM.
+
+<br><br>
+
+Saiba que fiquei aqui torcendo por você.
+
+<br><br>
+
+Queria encontrar um jeito diferente de te desejar coisas boas, então resolvi fazer isso aqui. Espero que você tenha gostado.
+
+<br><br>
+
+Você merece muitas coisas boas! ❤️
+</p>
+
+</section>
+
+<div class="dots" id="dots">
+<span class="dot active"></span>
+<span class="dot"></span>
+<span class="dot"></span>
+<span class="dot"></span>
+</div>
+
+<div class="signature">
+UMA SURPRESA PRA VOCÊ
+</div>
+
+</div>
+
+<script>
+
+const steps = [
+    {
+        heading: "Oi, Naju!",
+        message: "Tudo bem? Tenho uma coisa pra te mostrar.",
+        button: "Pode mostrar"
+    },
+    {
+        heading: "Opa, pera aí...",
+        message: "Não, pera... acho que não era bem aqui KKKKK.",
+        button: "Tentar novamente"
+    },
+    {
+        heading: "Agora vai!",
+        message: "Agora vai, confia em mim.",
+        button: "Continuar"
+    },
+    {
+        heading: "Pronto...",
+        message: "Pronto, agora sem brincadeira.",
+        button: "Finalmente"
+    }
+];
+
+let currentStep = 0;
+
+const heading = document.getElementById("heading");
+const message = document.getElementById("message");
+const button = document.getElementById("nextButton");
+const content = document.getElementById("content");
+const finalMessage = document.getElementById("finalMessage");
+const dots = document.querySelectorAll(".dot");
+
+button.addEventListener("click", function() {
+
+    currentStep++;
+
+    if (currentStep >= steps.length) {
+
+        content.classList.add("hidden");
+        finalMessage.classList.remove("hidden");
+        document.getElementById("dots").classList.add("hidden");
+
+        return;
+    }
+
+    const step = steps[currentStep];
+
+    heading.textContent = step.heading;
+    message.textContent = step.message;
+    button.textContent = step.button;
+
+    button.classList.toggle(
+        "moved",
+        currentStep % 2 === 1
+    );
+
+    dots.forEach((dot, index) => {
+        dot.classList.toggle(
+            "active",
+            index === currentStep
+        );
+    });
+
+});
+
+</script>
+
+</body>
+</html>
